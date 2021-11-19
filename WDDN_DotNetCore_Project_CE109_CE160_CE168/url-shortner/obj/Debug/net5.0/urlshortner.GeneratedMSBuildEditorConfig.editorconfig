@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = urlshortner
+build_property.ProjectDir = d:\DHYEY\Visual-Studio-Projects\Dot-Net-Core-Projects\url-shortner\WDDN_DotNetCore_Project_CE109_CE160_CE168\url-shortner\
