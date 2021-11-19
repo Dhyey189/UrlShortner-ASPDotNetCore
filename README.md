@@ -1,0 +1,2 @@
+# UrlShortner-ASPDotNetCore
+.net core
