@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http.Extensions;
 using System;
 using System.Threading.Tasks;
 using System.Runtime;
+using LiteDB;
+using System.Linq;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(builder =>
@@ -15,6 +17,9 @@ var host = Host.CreateDefaultBuilder(args)
         {
             // Add the necessary components for HTTP routing.
             services.AddRouting();
+
+            // Add LiteDB
+            services.AddSingleton<ILiteDatabase, LiteDatabase>(_ => new LiteDatabase("short-links.db"));
         })
         .Configure(app =>
         {
@@ -31,6 +36,7 @@ var host = Host.CreateDefaultBuilder(args)
                 });
 
                 endpoints.MapPost("/shorten", HandleShortenUrl);
+                endpoints.MapFallback(HandleRedirect);
             });
         });
     })
@@ -60,15 +66,34 @@ static Task HandleShortenUrl(HttpContext context)
     }
 
     var url = result.ToString();
-
+    var liteDB = context.RequestServices.GetService<ILiteDatabase>();
+    var links = liteDB.GetCollection<ShortLink>(BsonAutoId.Int32);
     // Temporary short link 
     var entry = new ShortLink
     {
-        Id = 123_456_789,
         Url = url
     };
-
+    links.Insert(entry);// adding entry
+    
     var urlChunk = entry.GetUrlChunk();
     var responseUri = $"{context.Request.Scheme}://{context.Request.Host}/{urlChunk}";
-    return context.Response.WriteAsync(responseUri);
+    context.Response.Redirect($"/#{responseUri}");// redirecting back to index.html
+    return Task.CompletedTask;
+}
+
+static Task HandleRedirect(HttpContext context)
+{
+    var db = context.RequestServices.GetService<ILiteDatabase>();
+    var collection = db.GetCollection<ShortLink>();
+
+    var path = context.Request.Path.ToUriComponent().Trim('/');
+    var id = ShortLink.GetId(path);
+    var entry = collection.Find(p => p.Id == id).FirstOrDefault();
+
+    if (entry != null)
+        context.Response.Redirect(entry.Url);
+    else
+        context.Response.Redirect("/");
+
+    return Task.CompletedTask;
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\url-shortner\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj": {}
+    "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\UrlShortner-ASPDotNetCore\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj": {}
   },
   "projects": {
-    "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\url-shortner\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj": {
+    "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\UrlShortner-ASPDotNetCore\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\url-shortner\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj",
+        "projectUniqueName": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\UrlShortner-ASPDotNetCore\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj",
         "projectName": "urlshortner",
-        "projectPath": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\url-shortner\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj",
+        "projectPath": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\UrlShortner-ASPDotNetCore\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\urlshortner.csproj",
         "packagesPath": "C:\\Users\\dhyey\\.nuget\\packages\\",
-        "outputPath": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\url-shortner\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\obj\\",
+        "outputPath": "D:\\DHYEY\\Visual-Studio-Projects\\Dot-Net-Core-Projects\\UrlShortner-ASPDotNetCore\\WDDN_DotNetCore_Project_CE109_CE160_CE168\\url-shortner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dhyey\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "LiteDB": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

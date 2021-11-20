@@ -3,27 +3,131 @@
 
 <head>
     <title>Simple URL Shortener</title>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <!link rel="stylesheet" href="~/CSS/style.css" type="text/css">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        header {
+            background-color: black;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 80%;
+        }
+
+        .sitename {
+            display: block;
+            font-size: 35px;
+            width: 30%;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        #url-area {
+            margin: 70px auto;
+            font-size: 30px;
+            text-align: center;
+            padding: 50px;
+            border-radius: 10px;
+            background-color: rgb(207, 223, 236);
+            align-items: center;
+            width: 80%;
+        }
+
+        .url {
+            display: block;
+            width: 80%;
+            height: 40px;
+            margin: 30px auto;
+            border-radius: 5px;
+            font-size: 22px;
+            border: 2px solid black;
+            outline: none;
+        }
+
+        .short-url {
+            margin: 20px;
+            text-decoration:!important;
+        }
+
+        .btn {
+            display: block;
+            margin: auto;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result-area {
+            margin: 20px;
+            display: flex;
+            justify-content:space-around;
+        }
+        .copy{
+            visibility:hidden;
+        }
+    </style>
 </head>
+    
 
 <body>
-    <main>
+    <form enctype="application/x-www-form-urlencoded" method="POST" action="/shorten">
         <header>
-            <h1>URL Shortener</h1>
-            <p>
-                Enter your URL below to retrieve the shortened version.
-            </p>
+            <div class="container">
+
+                <a href="/" class="sitename">Url Shortner</a>
+
+            </div>
         </header>
-        <section id="urlForm">
-            <form enctype="application/x-www-form-urlencoded" method="POST" action="/shorten">
-                <label for="url">
-                    URL
-                </label>
-                <input type="url" name="url" />
-                <button type="submit">Shorten</button>
-            </form>
-        </section>
-    </main>
+        <div id="url-area">
+            <p>Enter your URL here to retrieve the shorten version</p>
+            <input class="url" id="originalurl" type="url" name="url" placeholder="Enter Url to be shorten!" />
+            <button type="submit" class="btn">Shorten</button>
+            <div class="result-area">
+                <a id="url-link"><p id="urlResult" class="short-url"></p></a>
+                <button type="button" id="copybtn" onclick="copyUrl()" class="copy btn">Copy</button>
+            </div>
+        </div>
+
+    </form>
+    <script>
+        let data = window.location.hash;
+        if (data) {
+
+            let url = new URL(data.substr(1));
+
+            if (url.protocol === window.location.protocol
+                && url.host === window.location.host) {
+                let section = document.getElementById('urlResult');
+                section.innerHTML = `${url}`;
+                document.getElementById("copybtn").style.visibility = 'visible';
+                let link = document.getElementById('url-link');
+                link.href = url;
+                link.target = '_blank';
+                link.style.textDecoration = 'none'; 
+                link.style.color = 'green';
+            }
+        }
+        function link() {
+            return document.getElementById('urlResult').innerHTML;
+        }
+
+        function copyUrl() {
+            event.preventDefault();
+            var copyText = document.getElementById("urlResult");
+            navigator.clipboard.writeText(copyText.innerText);
+        }
+    </script>
 </body>
 
 </html>
